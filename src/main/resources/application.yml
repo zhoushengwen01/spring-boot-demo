@@ -1,0 +1,45 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /zhou
+spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: null
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.pojo
+
+logging:
+  level:
+    org.springframework.web: debug
+    org.springframework.security: debug
+    com.zhou: debug
+
+
+# inform.email(邮件发送)  inform.sms(短信发送)   inform.sms.email(短信和邮件同时发送)
+routingKey: inform.sms.email
+
+
+
+#  thymeleaf:
+#    cache: false #关闭页面缓存
+#    prefix: classpath:/views/ #页面拼接路径
