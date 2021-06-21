@@ -1,19 +1,21 @@
 package com.example.exceptionHandling;
 
 
-import com.example.response.CommonCode;
-import com.example.response.ResponseResult;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.response.CommonCode;
+import com.example.response.ResponseResult;
 
 /**
  * 统一异常捕获类
  **/
 @ControllerAdvice//控制器增强
-@Slf4j
 public class ExceptionCatch {
+	private static final Logger log = LoggerFactory.getLogger(ExceptionCatch.class);
 
     //捕获 CustomException异常,及项目中可预知异常
     @ExceptionHandler(CustomException.class)
