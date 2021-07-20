@@ -7,23 +7,40 @@
 
     <select id="findUserById"
             resultType="com.example.pojo.User">
-	select * from  user where id=#{id}
-	</select>
+        select *
+        from user
+        where id = #{id}
+    </select>
+    <select id="getMaxId" resultType="java.lang.String">
+        SELECT MAX(id) FROM dictionaries
+    </select>
+    <select id="getTableSize" resultType="java.lang.String">
+        SELECT CONCAT(TRUNCATE(SUM(data_length)/1024/1024,2),'MB') AS data_size_MB
+        FROM information_schema.tables WHERE TABLE_NAME = 'dictionaries'
+    </select>
 
     <insert id="saveUser"
             parameterType="com.example.pojo.User">
-		insert into user (id,name,age,department)
-		values(#{id},#{name},#{age},#{department})
-	</insert>
+        insert into user (id, name, age, department)
+        values (#{id}, #{name}, #{age}, #{department})
+    </insert>
+
+
+    <insert id="insertData">
+        insert into dictionaries (id,content)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.content})
+        </foreach>
+    </insert>
 
     <update id="updateUser"
             parameterType="com.example.pojo.User">
-UPDATE USER
-	SET `name` = #{name},
-	age = #{age},
-	department =#{department}
-WHERE
-	id = #{id}
-	</update>
+        UPDATE USER
+        SET `name`     = #{name},
+            age        = #{age},
+            department =#{department}
+        WHERE id = #{id}
+    </update>
 
 </mapper>
